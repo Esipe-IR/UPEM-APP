@@ -1,5 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+import createHistory from 'history/createBrowserHistory'
+import { routerMiddleware } from 'react-router-redux'
+import createSagaMiddleware from 'redux-saga'
+
+import RootReducer from './redux/RootReducer'
+import RootSaga from './redux/RootSaga'
+
+import App from './components/app/App'
+
+const history = createHistory()
+const routerM = routerMiddleware(history)
+const sagaM = createSagaMiddleware()
+
+const store = createStore(RootReducer, composeWithDevTools(
+  applyMiddleware(routerM),
+  applyMiddleware(sagaM)
+))
+
+sagaM.run(RootSaga)
+
+ReactDOM.render(
+  <Provider store={store}>
+      <App history={history} />
+  </Provider>,
+  document.getElementById('root')
+)
