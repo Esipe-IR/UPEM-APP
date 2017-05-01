@@ -39,6 +39,7 @@ export const fetchEvents = (params) => {
           endHour
           instructor
           classroom
+          class
           color
           date
       }
@@ -63,6 +64,7 @@ export const fetchResources = () => {
     calendar {
       resources {
         id
+        name
       }
     }
   }`

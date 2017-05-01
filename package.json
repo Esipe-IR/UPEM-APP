@@ -21,12 +21,16 @@
   "dependencies": {
     "moment": "^2.18.1",
     "react": "^15.5.4",
+    "react-addons-css-transition-group": "^15.5.2",
     "react-addons-shallow-compare": "^15.5.2",
+    "react-addons-transition-group": "^15.5.2",
+    "react-big-calendar": "^0.13.0",
     "react-dates": "^10.1.1",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
+    "reactstrap": "^4.5.0",
     "redux": "^3.6.0",
     "redux-saga": "^0.14.8",
     "upem-sdk": "^4.0.1"

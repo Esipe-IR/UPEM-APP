@@ -12,7 +12,14 @@ import createSagaMiddleware from 'redux-saga'
 import RootReducer from './redux/RootReducer'
 import RootSaga from './redux/RootSaga'
 
-import App from './components/app/App'
+import BigCalendar from 'react-big-calendar'
+import moment from 'moment'
+
+import App from './app/App'
+
+BigCalendar.setLocalizer(
+  BigCalendar.momentLocalizer(moment)
+);
 
 const history = createHistory()
 const routerM = routerMiddleware(history)

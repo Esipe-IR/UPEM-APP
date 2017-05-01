@@ -16,3 +16,7 @@ export const getWeekNb = (f) => {
 export const getDayByWeek = (day, nb) => {
   return moment().day(day).hour(0).minute(0).second(0).millisecond(0).week(nb)
 }
+
+export const getMomentFromDate = (date) => {
+  return moment(date)
+}

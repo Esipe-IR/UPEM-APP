@@ -1,9 +1,13 @@
-const dateToTimestamp = (date) => {
-  let d = parseInt(date.substring(0,2), 10)
-  let m = parseInt(date.substring(3,5), 10)
-  let y = parseInt(date.substring(6,10), 10)
+export const eventToDate = (event) => {
+  let d = parseInt(event.date.substring(0,2), 10)
+  let m = parseInt(event.date.substring(3,5), 10)
+  let y = parseInt(event.date.substring(6,10), 10)
 
-  return new Date(y, m-1, d).getTime() / 1000  
+  return new Date(y, m - 1, d)
+}
+
+export const dateToTimestamp = (date) => {
+  return date.getTime() / 1000  
 }
 
 const getWeekTimestamp = (f, l) => {
@@ -32,7 +36,8 @@ const getRangeFormat = (result, params) => {
       hours[x] = element.startHour
     }
 
-    let timestamp = dateToTimestamp(element.date)    
+    let d = eventToDate(element)
+    let timestamp = dateToTimestamp(d)    
     let y = days.indexOf(timestamp)
     
     if (!events[x]) events[x] = []
