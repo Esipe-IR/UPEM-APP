@@ -9,6 +9,10 @@ export const getLastWeekDay = () => {
   return moment().endOf('week').day(-2)
 }
 
+export const getToday = () => {
+  return moment()
+} 
+
 export const getWeekNb = (f) => {
   return f.week();
 }

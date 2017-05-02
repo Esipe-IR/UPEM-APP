@@ -54,7 +54,7 @@ class CalendarResoucres extends React.Component {
           </div>
         </div>
         <div className="row">
-          {this.props.resources.map(resource => (
+          {this.props.resources.slice(0, 25).map(resource => (
             <div className="col-sm-4 col-xs-12 text-center" key={resource.id}>
               <Resource resource={resource} load={this.push.bind(this)} />
             </div>

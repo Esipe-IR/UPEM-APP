@@ -13,21 +13,21 @@ const Event = (e) => (
     <div className="rbc-event-label" style={{
       background: "rgb(" + e.event.color + ")",
       width: "100%",
-      padding: "5px 10px"
+      padding: "2px 10px"
     }}>
-      {e.event.startHour} - {e.event.endHour} ({e.event.instructor})
+      {e.event.startHour} - {e.event.endHour}
     </div>
 
     <div className="rbc-event-content" style={{
       textAlign: "center",
-      paddingTop: "10px"
+      paddingTop: "5px"
     }}>
-      <b>{e.event.name}</b>
-      <p>{e.event.classroom}<br/>
+      <b>{e.event.name}</b><br/>
+      <b>{e.event.classroom}</b><br/>
       {e.event.class.map((c, i) => (
-        <span key={i}>{c} </span>
+        <i key={i}>{c}<br/></i>
       ))}
-      </p>
+      <p>{e.event.instructor}</p>
     </div>
   </div>
 )

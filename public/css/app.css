@@ -4,18 +4,21 @@ iframe {
   width: 145px;
   border: none !important;
 }
-
+.rbc-calendar {
+  min-height: 650px;
+}
 .SingleDatePicker__picker.SingleDatePicker__picker--direction-left.SingleDatePicker__picker--horizontal.SingleDatePicker__picker--portal.SingleDatePicker__picker--full-screen-portal {
   z-index: 999;
 }
-
+.DayPickerKeyboardShortcuts__show.DayPickerKeyboardShortcuts__show--bottom-right {
+  display: none;
+}
 section {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-
 .stylish-input-group .input-group-addon{
-    background: white !important; 
+  background: white !important; 
 }
 .stylish-input-group .form-control{
 	border-right:0; 
@@ -23,6 +26,6 @@ section {
 	border-color:#ccc;
 }
 .stylish-input-group button{
-    border:0;
-    background:transparent;
+  border:0;
+  background:transparent;
 }

@@ -36,6 +36,8 @@
     "upem-sdk": "^4.0.1"
   },
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "post": "cp build/index.html build/200.html && surge"
   }
 }

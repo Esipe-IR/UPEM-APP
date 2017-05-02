@@ -11,6 +11,7 @@ import {
 import {
   getFirstWeekDay,
   getLastWeekDay,
+  getToday,
   getMomentFromDate,
   getWeekNb,
   getDayByWeek
@@ -29,10 +30,11 @@ class CalendarEvents extends React.Component {
   componentDidMount() {
     let f = getFirstWeekDay()
     let l = getLastWeekDay()
+    let t = getToday()
 
     this.props.dispatch(rcvView(window.innerWidth > 900 ? "week" : "day"))
-    this.props.dispatch(rcvDay(f))
-    this.props.dispatch(rcvWeek(getWeekNb(f)))
+    this.props.dispatch(rcvDay(t))
+    this.props.dispatch(rcvWeek(getWeekNb(t)))
     this.props.dispatch(askEvents({
       resources: this.props.match.params.resources,
       startDate: f,
