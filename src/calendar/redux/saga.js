@@ -11,7 +11,7 @@ import { fetchEvents, fetchResources } from '../../services/fetch'
 function* calendarSaga() {
   yield takeLatest(ASK_EVENTS, function* (action) {
     let events = yield call(fetchEvents, action.payload)
-    if (events) events = events.calendar.events
+    if (events) events = events.events
     if (!events) events = []
 
     yield put(rcvEvents(events))
@@ -22,7 +22,7 @@ function* calendarSaga() {
 
     if (!resources) {
       resources = yield call(fetchResources)
-      if (resources) resources = resources.calendar.resources
+      if (resources) resources = resources.resources
       localStorage.setItem("ade_resources", JSON.stringify(resources))
     } else {
       resources = JSON.parse(resources)

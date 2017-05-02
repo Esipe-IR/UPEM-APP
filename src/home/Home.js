@@ -3,7 +3,11 @@ import React from 'react'
 export default class Home extends React.Component {
   render() {
     return (
-      <h1>Hello, world.</h1>
+      <section className="container">
+        <h1>UPEM Tools</h1>
+
+        <p>Version: 1.0 Alpha</p>
+      </section>
     )
   }
 }

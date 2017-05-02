@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { askResources, askSearch } from './redux/actions' 
 import Resource from './sub/Resource'
+import { logEvent } from '../services/analytics'
 
 class CalendarResoucres extends React.Component {
   componentDidMount() {
@@ -10,12 +11,27 @@ class CalendarResoucres extends React.Component {
   }
 
   search(e) {
-    this.props.dispatch(askSearch(e.target.value))
+    e.preventDefault()
+    let value = e.target[0].value
+
+    logEvent("resources_search", null, {
+      search: value
+    })
+
+    this.props.dispatch(askSearch(value))
   }
 
   push(e) {
     e.preventDefault()
-    this.props.dispatch(push(e.target.getAttribute("href", 2)))
+    let path = e.target.getAttribute("href", 2)
+    let int = path.replace("/calendar/", "")
+    int = parseInt(int, 10)
+
+    logEvent("resources_clickView", int, {
+      uri: path
+    })
+
+    this.props.dispatch(push(path))
   }
 
   render() {
@@ -23,16 +39,18 @@ class CalendarResoucres extends React.Component {
       <section className="container">
         <div className="row">
           <div className="col-12">
-            <div className="form-group">
-              <div className="input-group stylish-input-group">
-                <input type="text" className="form-control" onChange={this.search.bind(this)} placeholder="Search"/>
-                <span className="input-group-addon">
-                  <button type="submit">
-                    <i className="fa fa-search" aria-hidden="true"></i>
-                  </button>
-                </span>
+            <form onSubmit={this.search.bind(this)}>
+              <div className="form-group">
+                <div className="input-group stylish-input-group">
+                  <input type="text" className="form-control" placeholder="Search"/>
+                  <span className="input-group-addon">
+                    <button type="submit">
+                      <i className="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                  </span>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
         <div className="row">

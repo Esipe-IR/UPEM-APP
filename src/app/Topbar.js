@@ -4,11 +4,17 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } f
 import { push } from 'react-router-redux'
 import { rcvToggleNav } from './redux/actions'
 import { UPEM_URL } from '../services/upem'
+import { logEvent } from '../services/analytics'
 
 class Topbar extends React.Component {
   load(e) {
     e.preventDefault()
     let path = e.target.getAttribute("href", 2)
+
+    logEvent("navbar_clickLink", null, {
+      uri: path
+    })
+    
     this.props.dispatch(push(path))
     this.props.dispatch(rcvToggleNav(false))
   }

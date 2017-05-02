@@ -28,21 +28,19 @@ export const fetchUser = (token) => {
 
 export const fetchEvents = (params) => {
   const graph = `query($resources: String!, $date: String, $startDate: String, $endDate: String) {
-    calendar {
-      events(resources: $resources,
-        date: $date,
-        startDate: $startDate,
-        endDate: $endDate) {
-          id
-          name
-          startHour
-          endHour
-          instructor
-          classroom
-          class
-          color
-          date
-      }
+    events(resources: $resources,
+      date: $date,
+      startDate: $startDate,
+      endDate: $endDate) {
+        id
+        name
+        startHour
+        endHour
+        instructor
+        classroom
+        class
+        color
+        date
     }
   }`
 
@@ -61,11 +59,9 @@ export const fetchEvents = (params) => {
 
 export const fetchResources = () => {
   const graph = `query {
-    calendar {
-      resources {
-        id
-        name
-      }
+    resources {
+      id
+      name
     }
   }`
 

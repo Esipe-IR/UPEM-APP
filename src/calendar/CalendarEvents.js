@@ -22,6 +22,8 @@ import BigCalendar from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import Event from './sub/Event'
 import EventModal from './sub/EventModal'
+import Toolbar from './sub/Toolbar'
+import { logEvent } from '../services/analytics'
 
 class CalendarEvents extends React.Component {
   componentDidMount() {
@@ -47,6 +49,12 @@ class CalendarEvents extends React.Component {
   onDateChange(day) {
     let week = getWeekNb(day)
     this.props.dispatch(rcvDay(day))
+
+    logEvent("event_changeDate", parseInt(this.props.match.params.resources, 10), {
+      resources: this.props.match.params.resources,
+      date: day.format("MM/DD/YYYY")
+    })
+
     if (this.props.week !== week) {
       this.props.dispatch(rcvWeek(week))
       this.props.dispatch(askEvents({
@@ -67,6 +75,11 @@ class CalendarEvents extends React.Component {
   }
 
   onView(view) {
+    logEvent("event_changeView", parseInt(this.props.match.params.resources, 10), {
+      resources: this.props.match.params.resources,
+      view: view
+    })
+
     this.props.dispatch(rcvView(view))
   }
 
@@ -87,6 +100,11 @@ class CalendarEvents extends React.Component {
   }
 
   onClick(e) {
+    logEvent("event_clickEvent", parseInt(this.props.match.params.resources, 10), {
+      resources: this.props.match.params.resources,
+      evt: e.name + "/" + e.date + "/" + e.startHour
+    })
+
     this.props.dispatch(rcvModal(e))
   }
   
@@ -124,7 +142,7 @@ class CalendarEvents extends React.Component {
               onSelectEvent={this.onClick.bind(this)}
               components={{
                 eventWrapper: Event,
-                toolbar: (e,y,z) => {console.log(e,y,z); return null}
+                toolbar: Toolbar
               }}
             />
           </div>
