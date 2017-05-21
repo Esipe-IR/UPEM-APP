@@ -5,7 +5,7 @@ iframe {
   border: none !important;
 }
 .rbc-calendar {
-  min-height: 750px;
+  min-height: 800px;
 }
 .SingleDatePicker__picker.SingleDatePicker__picker--direction-left.SingleDatePicker__picker--horizontal.SingleDatePicker__picker--portal.SingleDatePicker__picker--full-screen-portal {
   z-index: 999;

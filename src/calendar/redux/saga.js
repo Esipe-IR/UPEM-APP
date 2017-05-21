@@ -1,20 +1,22 @@
-import { takeLatest, put, call } from 'redux-saga/effects'
+import { select, takeLatest, put, call } from 'redux-saga/effects'
 import {
   ASK_EVENTS,
   ASK_RESOURCES,
   ASK_SEARCH,
-  rcvEvents,
+  addEvents,
   rcvResources
 } from './actions'
 import { fetchEvents, fetchResources } from '../../services/fetch'
 
 function* calendarSaga() {
   yield takeLatest(ASK_EVENTS, function* (action) {
+    let { calendar } = yield select()
     let events = yield call(fetchEvents, action.payload)
-    if (events) events = events.events
-    if (!events) events = []
+    
+    if (events) events = {[calendar.week]: events.events}
+    if (!events) events = {[calendar.week]: []}
 
-    yield put(rcvEvents(events))
+    yield put(addEvents(events))
   })
 
   yield takeLatest(ASK_RESOURCES, function* (action) {
@@ -40,7 +42,7 @@ function* calendarSaga() {
     resources = JSON.parse(resources)
     
     resources.forEach(function(e) {
-      if (e.name.indexOf(action.payload) !== -1) matches.push(e)  
+      if (e.name.toUpperCase().indexOf(action.payload.toUpperCase()) !== -1) matches.push(e)  
     })
 
     yield put(rcvResources(matches))

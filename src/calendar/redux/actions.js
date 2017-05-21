@@ -5,6 +5,7 @@ export const RCV_FOCUSED = "calendar/RCV::FOCUSED"
 export const RCV_EVENTS = "calendar/RCV::EVENTS"
 export const RCV_MODAL = "calendar/RCV::MODAL"
 export const ASK_EVENTS = "calendar/ASK::EVENTS"
+export const ADD_EVENTS = "calendar/ADD::EVENTS"
 
 export const rcvView = (view) => ({
   type: RCV_VIEW,
@@ -39,6 +40,11 @@ export const rcvModal = (modal) => ({
 export const askEvents = (params) => ({
   type: ASK_EVENTS,
   payload: params
+})
+
+export const addEvents = (events) => ({
+  type: ADD_EVENTS,
+  payload: events
 })
 
 /**

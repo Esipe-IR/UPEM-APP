@@ -6,7 +6,8 @@ import {
   RCV_EVENTS,
   RCV_RESOURCES,
   RCV_SEARCH,
-  RCV_MODAL
+  RCV_MODAL,
+  ADD_EVENTS
 } from './actions'
 
 const initialState = {
@@ -14,12 +15,22 @@ const initialState = {
   day: null,
   week: 0,
   focused: false,
-  events: [],
+  events: {},
   resources: [],
   modal: false
 }
 
 const newState = (state, action, x) => Object.assign({}, state, {[x]: action.payload})
+const addState = (state, action, x) => {
+  let o = Object.assign({}, state[x], {})
+  let keys = Object.keys(action.payload)
+
+  keys.forEach(k => {
+    o[k] = action.payload[k]
+  })
+
+  return Object.assign({}, state, {[x]: o})
+}
 
 const reducer = {
   [RCV_VIEW]: (state, action) => newState(state, action, "view"),
@@ -29,7 +40,8 @@ const reducer = {
   [RCV_EVENTS]: (state, action) => newState(state, action, "events"),  
   [RCV_RESOURCES]: (state, action) => newState(state, action, "resources"),
   [RCV_SEARCH]: (state, action) => newState(state, action, "search"),
-  [RCV_MODAL]: (state, action) => newState(state, action, "modal")
+  [RCV_MODAL]: (state, action) => newState(state, action, "modal"),
+  [ADD_EVENTS]: (state, action) => addState(state, action, "events")
 }
 
 const CalendarReducer = (state = initialState, action) => {

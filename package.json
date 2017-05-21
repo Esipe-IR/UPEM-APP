@@ -32,6 +32,7 @@
     "react-router-redux": "^5.0.0-alpha.6",
     "reactstrap": "^4.5.0",
     "redux": "^3.6.0",
+    "redux-localstorage": "^0.4.1",
     "redux-saga": "^0.14.8",
     "upem-sdk": "^4.0.1"
   },

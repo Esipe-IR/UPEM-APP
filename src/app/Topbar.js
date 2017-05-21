@@ -46,7 +46,7 @@ class Topbar extends React.Component {
           <NavbarToggler right onClick={this.onClick.bind(this)} />
           <NavbarBrand href="/">UPEM Tools</NavbarBrand>
           <Collapse isOpen={this.props.toggleNav} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav navbar>
               <NavItem>
                 <NavLink onClick={this.load.bind(this)} href="/">Home</NavLink>
               </NavItem>

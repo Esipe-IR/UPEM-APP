@@ -40,12 +40,6 @@ class CalendarEvents extends React.Component {
       startDate: f,
       endDate: l
     }))
-    
-    window.addEventListener("resize", this.onResize.bind(this), false)
-  }
-
-  onResize() {
-    this.props.dispatch(rcvView(window.innerWidth > 900 ? "week" : "day"))
   }
 
   onDateChange(day) {
@@ -109,6 +103,13 @@ class CalendarEvents extends React.Component {
 
     this.props.dispatch(rcvModal(e))
   }
+
+  getEvents(events) {
+    let element = events[this.props.week]
+
+    if (element && element.length) return element
+    else return []
+  }
   
   render() {
     return (
@@ -131,7 +132,7 @@ class CalendarEvents extends React.Component {
           <div className="col-12 mt-5">
             <BigCalendar
               date={this.props.day.toDate()}
-              events={this.props.events}
+              events={this.getEvents(this.props.events)}
               views={["day", "week"]}
               view={this.props.view}
               min={new Date(2017, 3, 30, 8)}          
