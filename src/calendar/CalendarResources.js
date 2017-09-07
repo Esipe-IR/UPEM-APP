@@ -1,37 +1,37 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
-import { askResources, askSearch } from './redux/actions' 
-import Resource from './sub/Resource'
-import { logEvent } from '../services/analytics'
+import React from "react";
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
+import { askResources, askSearch } from "./redux/actions";
+import Resource from "./sub/Resource";
+import { logEvent } from "../services/analytics";
 
 class CalendarResoucres extends React.Component {
   componentDidMount() {
-    this.props.dispatch(askResources())
+    this.props.dispatch(askResources());
   }
 
   search(e) {
-    e.preventDefault()
-    let value = e.target[0].value
+    e.preventDefault();
+    let value = e.target[0].value;
 
     logEvent("resources_search", null, {
       search: value
-    })
+    });
 
-    this.props.dispatch(askSearch(value))
+    this.props.dispatch(askSearch(value));
   }
 
   push(e) {
-    e.preventDefault()
-    let path = e.target.getAttribute("href", 2)
-    let int = path.replace("/calendar/", "")
-    int = parseInt(int, 10)
+    e.preventDefault();
+    let path = e.target.getAttribute("href", 2);
+    let int = path.replace("/calendar/", "");
+    int = parseInt(int, 10);
 
     logEvent("resources_clickView", int, {
       uri: path
-    })
+    });
 
-    this.props.dispatch(push(path))
+    this.props.dispatch(push(path));
   }
 
   render() {
@@ -42,10 +42,14 @@ class CalendarResoucres extends React.Component {
             <form onSubmit={this.search.bind(this)}>
               <div className="form-group">
                 <div className="input-group stylish-input-group">
-                  <input type="text" className="form-control" placeholder="Search"/>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search"
+                  />
                   <span className="input-group-addon">
                     <button type="submit">
-                      <i className="fa fa-search" aria-hidden="true"></i>
+                      <i className="fa fa-search" aria-hidden="true" />
                     </button>
                   </span>
                 </div>
@@ -61,16 +65,16 @@ class CalendarResoucres extends React.Component {
           ))}
         </div>
       </section>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { calendar } = state
+  const { calendar } = state;
 
   return {
     resources: calendar.resources
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps)(CalendarResoucres)
+export default connect(mapStateToProps)(CalendarResoucres);

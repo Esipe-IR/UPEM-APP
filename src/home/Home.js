@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default class Home extends React.Component {
   render() {
@@ -8,6 +8,6 @@ export default class Home extends React.Component {
 
         <p>Version: 1.0 Alpha</p>
       </section>
-    )
+    );
   }
 }
