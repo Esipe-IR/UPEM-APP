@@ -15,18 +15,11 @@ import {
   getMomentFromDate,
   getWeekNb,
   getDayByWeek
-} from "../services/date";
-import { eventToDate } from "../services/format";
-import { SingleDatePicker } from "react-dates";
-import "react-dates/lib/css/_datepicker.css";
-import BigCalendar from "react-big-calendar";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import Event from "./sub/Event";
-import EventModal from "./sub/EventModal";
-import Toolbar from "./sub/Toolbar";
-import { logEvent } from "../services/analytics";
+} from "../../services/date";
+import { eventToDate } from "../../services/format";
+import { logEvent } from "../../services/analytics";
 
-class CalendarEvents extends React.Component {
+class CEvents extends React.Component {
   componentDidMount() {
     let f = getFirstWeekDay();
     let l = getLastWeekDay();
@@ -128,48 +121,7 @@ class CalendarEvents extends React.Component {
   }
 
   render() {
-    return (
-      <section className="container-fluid">
-        {this.props.day ? (
-          <div className="row">
-            <div className="col-12">
-              <div className="text-center">
-                <SingleDatePicker
-                  focused={this.props.focused}
-                  date={this.props.day}
-                  numberOfMonths={1}
-                  withFullScreenPortal={true}
-                  isOutsideRange={() => false}
-                  onDateChange={this.onDateChange.bind(this)}
-                  onFocusChange={this.onFocusChange.bind(this)}
-                />
-              </div>
-            </div>
-            <div className="col-12 mt-5">
-              <BigCalendar
-                date={this.props.day.toDate()}
-                events={this.getEvents(this.props.events)}
-                views={["day", "week"]}
-                view={this.props.view}
-                min={new Date(2017, 3, 30, 8)}
-                max={new Date(2017, 3, 30, 19)}
-                startAccessor={this.startAccessor}
-                endAccessor={this.endAccessor}
-                onNavigate={this.onNavigate.bind(this)}
-                onView={this.onView.bind(this)}
-                onSelecting={this.onClick.bind(this)}
-                onSelectEvent={this.onClick.bind(this)}
-                components={{
-                  eventWrapper: Event,
-                  toolbar: Toolbar
-                }}
-              />
-            </div>
-          </div>
-        ) : null}
-        <EventModal />
-      </section>
-    );
+    return null;
   }
 }
 
@@ -185,4 +137,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(CalendarEvents);
+export default connect(mapStateToProps)(CEvents);

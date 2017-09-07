@@ -23,15 +23,53 @@ export const fetchUser = token => {
 
   return fetch(GRAPH_URL, getConfig(graph, null, token))
     .then(result => result.json())
-    .then(result => result.data);
+    .then(result => {
+      const data = result.data;
+
+      if (data.user) {
+        return data.user;
+      }
+
+      return null;
+    });
+};
+
+export const fetchProjects = () => {
+  const graph = `query {
+    projects {
+      id
+      name
+    }
+  }`;
+
+  return fetch(GRAPH_URL, getConfig(graph))
+    .then(result => result.json())
+    .then(result => {
+      const data = result.data;
+
+      if (data.projects) {
+        return data.projects;
+      }
+
+      return null;
+    });
 };
 
 export const fetchEvents = params => {
-  const graph = `query($resources: String!, $date: String, $startDate: String, $endDate: String) {
-    events(resources: $resources,
+  const graph = `query(
+    $projectId: Int!,
+    $resources: String!,
+    $date: String,
+    $startDate: String,
+    $endDate: String
+  ) {
+    events(
+      projectId: $projectId,
+      resources: $resources,
       date: $date,
       startDate: $startDate,
-      endDate: $endDate) {
+      endDate: $endDate
+    ) {
         id
         name
         startHour
@@ -44,30 +82,36 @@ export const fetchEvents = params => {
     }
   }`;
 
-  let variables = {
-    resources: params.resources
-  };
-
-  if (params.date) variables.date = params.date.format("MM/DD/YYYY").toString();
-  if (params.startDate)
-    variables.startDate = params.startDate.format("MM/DD/YYYY").toString();
-  if (params.endDate)
-    variables.endDate = params.endDate.format("MM/DD/YYYY").toString();
-
-  return fetch(GRAPH_URL, getConfig(graph, variables))
+  return fetch(GRAPH_URL, getConfig(graph, params))
     .then(result => result.json())
-    .then(result => result.data);
+    .then(result => {
+      const data = result.data;
+
+      if (data.events) {
+        return data.events;
+      }
+
+      return [];
+    });
 };
 
-export const fetchResources = () => {
-  const graph = `query {
-    resources {
+export const fetchResources = params => {
+  const graph = `query($projectId: Int!) {
+    resources(projectId: $projectId) {
       id
       name
     }
   }`;
 
-  return fetch(GRAPH_URL, getConfig(graph))
+  return fetch(GRAPH_URL, getConfig(graph, params))
     .then(result => result.json())
-    .then(result => result.data);
+    .then(result => {
+      const data = result.data;
+
+      if (data.resources) {
+        return data.resources;
+      }
+
+      return [];
+    });
 };

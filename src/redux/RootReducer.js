@@ -1,12 +1,20 @@
 import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";
 
-import AppReducer from "../app/redux/reducer";
-import CalendarReducer from "../calendar/redux/reducer";
+import { AppReducer, AppState } from "../app/redux/reducer";
+import { CRReducer, CRState } from "../calendar/CResources/redux/reducer";
+import { CEReducer, CEState } from "../calendar/CEvents/redux/reducer";
+
+const CreateReducer = (reducer, initialState) => {
+  return (state = initialState, action) => {
+    return reducer[action.type] ? reducer[action.type](state, action) : state;
+  };
+};
 
 const RootReducer = combineReducers({
-  app: AppReducer,
-  calendar: CalendarReducer,
+  app: CreateReducer(AppReducer, AppState),
+  calendar_resources: CreateReducer(CRReducer, CRState),
+  calendar_events: CreateReducer(CEReducer, CEState),
   routing: routerReducer
 });
 

@@ -1,10 +1,10 @@
 import { fork } from "redux-saga/effects";
-import appSaga from "../app/redux/saga";
-import calendarSaga from "../calendar/redux/saga";
+import AppSaga from "../app/redux/saga";
+import CRSaga from "../calendar/CResources/redux/saga";
 
 function* RootSaga() {
-  yield fork(appSaga);
-  yield fork(calendarSaga);
+  yield fork(AppSaga);
+  yield fork(CRSaga);
 }
 
 export default RootSaga;

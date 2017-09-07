@@ -4,9 +4,9 @@ import { Route } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 import Topbar from "./Topbar";
 import Home from "../home/Home";
-import CalendarResources from "../calendar/CalendarResources";
-import CalendarEvents from "../calendar/CalendarEvents";
-import { rcvToken, askUser } from "./redux/actions";
+import CResources from "../calendar/CResources/CResources";
+import CEvents from "../calendar/CEvents/CEvents";
+import { rcvToken, askUser, askProject } from "./redux/actions";
 import { sdk } from "../services/upem";
 
 class App extends React.Component {
@@ -17,6 +17,8 @@ class App extends React.Component {
       dispatch(rcvToken(token));
       dispatch(askUser());
     });
+
+    dispatch(askProject());
   }
 
   render() {
@@ -24,23 +26,27 @@ class App extends React.Component {
       <ConnectedRouter history={this.props.history}>
         <main>
           <Topbar />
-
           <Route exact path="/" title="home" component={Home} />
-          <Route
+          
+          {this.props.project ? <Route
             exact
             path="/calendar"
             title="calendar_resources"
-            component={CalendarResources}
-          />
-          <Route
+            component={CResources}
+          /> : null}
+          {/* <Route
             path="/calendar/:resources"
             title="calendar_events"
             component={CalendarEvents}
-          />
+          /> */}
         </main>
       </ConnectedRouter>
     );
   }
 }
 
-export default connect()(App);
+const mapStateToProps = (state, ownProps) => ({
+  project: state.app.project
+});
+
+export default connect(mapStateToProps)(App);

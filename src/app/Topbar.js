@@ -49,7 +49,7 @@ class Topbar extends React.Component {
     return (
       <Navbar color="inverse" full inverse toggleable>
         <NavbarToggler right onClick={this.onClick.bind(this)} />
-        <NavbarBrand href="/">UPEM Tools</NavbarBrand>
+        <NavbarBrand href="/">UPEM App</NavbarBrand>
         <Collapse isOpen={this.props.toggleNav} navbar>
           <Nav navbar>
             <NavItem>
