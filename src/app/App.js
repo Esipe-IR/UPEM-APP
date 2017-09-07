@@ -27,18 +27,22 @@ class App extends React.Component {
         <main>
           <Topbar />
           <Route exact path="/" title="home" component={Home} />
-          
-          {this.props.project ? <Route
-            exact
-            path="/calendar"
-            title="calendar_resources"
-            component={CResources}
-          /> : null}
-          {/* <Route
-            path="/calendar/:resources"
-            title="calendar_events"
-            component={CalendarEvents}
-          /> */}
+
+          {this.props.project ? (
+            <Route
+              exact
+              path="/calendar"
+              title="calendar_resources"
+              component={CResources}
+            />
+          ) : null}
+          {this.props.project ? (
+            <Route
+              path="/calendar/:resources"
+              title="calendar_events"
+              component={CalendarEvents}
+            />
+          ) : null}
         </main>
       </ConnectedRouter>
     );
