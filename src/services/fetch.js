@@ -24,6 +24,11 @@ export const fetchUser = token => {
   return fetch(GRAPH_URL, getConfig(graph, null, token))
     .then(result => result.json())
     .then(result => {
+      if (result.errors) {
+        console.log("Error =>", result.errors);
+        return;
+      }
+
       const data = result.data;
 
       if (data.user) {
@@ -45,6 +50,11 @@ export const fetchProjects = () => {
   return fetch(GRAPH_URL, getConfig(graph))
     .then(result => result.json())
     .then(result => {
+      if (result.errors) {
+        console.log("Error =>", result.errors);
+        return;
+      }
+
       const data = result.data;
 
       if (data.projects) {
@@ -59,32 +69,35 @@ export const fetchEvents = params => {
   const graph = `query(
     $projectId: Int!,
     $resources: String!,
-    $date: String,
-    $startDate: String,
-    $endDate: String
+    $startDate: String!,
+    $endDate: String!
   ) {
     events(
       projectId: $projectId,
       resources: $resources,
-      date: $date,
       startDate: $startDate,
       endDate: $endDate
     ) {
-        id
-        name
-        startHour
-        endHour
-        instructor
-        classroom
-        class
-        color
-        date
+      id
+      name
+      startHour
+      endHour
+      instructor
+      classroom
+      class
+      date
+      color
     }
   }`;
 
   return fetch(GRAPH_URL, getConfig(graph, params))
     .then(result => result.json())
     .then(result => {
+      if (result.errors) {
+        console.log("Error =>", result.errors);
+        return;
+      }
+
       const data = result.data;
 
       if (data.events) {
@@ -92,6 +105,21 @@ export const fetchEvents = params => {
       }
 
       return [];
+    });
+};
+
+export const fetchResource = params => {
+  const graph = `query($projectId: Int!, $resource: Int) {
+    resource(projectId: $projectId, resource: $resource) {
+      id
+      name
+    }
+  }`;
+
+  return fetch(GRAPH_URL, getConfig(graph, params))
+    .then(result => result.json())
+    .then(result => {
+      console.log(result);
     });
 };
 
@@ -106,6 +134,11 @@ export const fetchResources = params => {
   return fetch(GRAPH_URL, getConfig(graph, params))
     .then(result => result.json())
     .then(result => {
+      if (result.errors) {
+        console.log("Error =>", result.errors);
+        return;
+      }
+
       const data = result.data;
 
       if (data.resources) {

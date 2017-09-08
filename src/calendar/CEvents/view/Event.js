@@ -6,9 +6,9 @@ const Event = (e) => (
     borderColor: "rgb(" + e.event.color + ")",
     width: e.children.props.style.width === "65%" ? "50%" : e.children.props.style.width,
     left: e.children.props.style.left === "35%" ? "50%" : e.children.props.style.left,
-    background: "#FFF",
+    background: "#FBFBFB",
     padding: 0,
-    color: "black"
+    color: "#000"
   }} onClick={e.children.props.onClick}>
     <div className="rbc-event-label" style={{
       background: "rgb(" + e.event.color + ")",

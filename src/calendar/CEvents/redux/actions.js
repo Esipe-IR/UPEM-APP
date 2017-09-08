@@ -1,12 +1,12 @@
-export const RCV_VIEW = "calendar/RCV::VIEW";
-export const RCV_DAY = "calendar/RCV::DAY";
-export const RCV_WEEK = "calendar/RCV::WEEK";
-export const RCV_FOCUSED = "calendar/RCV::FOCUSED";
-export const RCV_EVENTS = "calendar/RCV::EVENTS";
-export const RCV_MODAL = "calendar/RCV::MODAL";
+export const RCV_VIEW = "calendar/events/RCV::VIEW";
+export const RCV_DAY = "calendar/events/RCV::DAY";
+export const RCV_WEEK = "calendar/events/RCV::WEEK";
+export const RCV_FOCUSED = "calendar/events/RCV::FOCUSED";
+export const RCV_EVENTS = "calendar/events/RCV::EVENTS";
+export const RCV_MODAL = "calendar/events/RCV::MODAL";
 
-export const ASK_EVENTS = "calendar/ASK::EVENTS";
-export const ADD_EVENTS = "calendar/ADD::EVENTS";
+export const ASK_EVENTS = "calendar/events/ASK::EVENTS";
+export const ADD_EVENTS = "calendar/events/ADD::EVENTS";
 
 export const rcvView = view => ({
   type: RCV_VIEW,

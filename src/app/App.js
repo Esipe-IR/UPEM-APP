@@ -40,7 +40,7 @@ class App extends React.Component {
             <Route
               path="/calendar/:resources"
               title="calendar_events"
-              component={CalendarEvents}
+              component={CEvents}
             />
           ) : null}
         </main>

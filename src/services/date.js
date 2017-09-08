@@ -32,3 +32,16 @@ export const getDayByWeek = (day, nb) => {
 export const getMomentFromDate = date => {
   return moment(date);
 };
+
+export const getRange = (start, end) => {
+  let dates = [];
+  let currentDate = moment(start);
+  let stopDate = moment(end);
+
+  while (currentDate <= stopDate) {
+    dates.push(moment(currentDate).toDate());
+    currentDate = moment(currentDate).add(1, "days");
+  }
+
+  return dates;
+};

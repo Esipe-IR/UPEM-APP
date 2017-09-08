@@ -19,6 +19,8 @@ import moment from "moment";
 
 import App from "./app/App";
 
+import 'bootstrap/dist/css/bootstrap.css';
+
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 const history = createHistory();

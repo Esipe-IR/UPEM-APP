@@ -19,7 +19,7 @@ class Topbar extends React.Component {
     e.preventDefault();
     let path = e.target.getAttribute("href", 2);
 
-    logEvent("navbar_clickLink", null, {
+    logEvent("navbar_click_link", null, {
       uri: path
     });
 

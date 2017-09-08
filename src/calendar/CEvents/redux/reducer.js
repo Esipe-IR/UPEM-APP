@@ -8,10 +8,11 @@ import {
   ADD_EVENTS
 } from "./actions";
 import { newState, addState } from "../../../services/utils";
+import { getToday } from "../../../services/date";
 
 export const CEState = {
   view: "day",
-  day: null,
+  day: getToday(),
   week: 0,
   focused: false,
   events: {},

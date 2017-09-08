@@ -18,6 +18,7 @@ import {
 } from "../../services/date";
 import { eventToDate } from "../../services/format";
 import { logEvent } from "../../services/analytics";
+import View from "./view";
 
 class CEvents extends React.Component {
   componentDidMount() {
@@ -42,7 +43,7 @@ class CEvents extends React.Component {
     this.props.dispatch(rcvDay(day));
 
     logEvent(
-      "event_changeDate",
+      "event_change_date",
       parseInt(this.props.match.params.resources, 10),
       {
         resources: this.props.match.params.resources,
@@ -73,7 +74,7 @@ class CEvents extends React.Component {
 
   onView(view) {
     logEvent(
-      "event_changeView",
+      "event_change_view",
       parseInt(this.props.match.params.resources, 10),
       {
         resources: this.props.match.params.resources,
@@ -102,7 +103,7 @@ class CEvents extends React.Component {
 
   onClick(e) {
     logEvent(
-      "event_clickEvent",
+      "event_click_event",
       parseInt(this.props.match.params.resources, 10),
       {
         resources: this.props.match.params.resources,
@@ -121,19 +122,31 @@ class CEvents extends React.Component {
   }
 
   render() {
-    return null;
+    return (
+      <View
+        {...this.props}
+        onDateChange={this.onDateChange.bind(this)}
+        onFocusChange={this.onFocusChange.bind(this)}
+        getEvents={this.getEvents.bind(this)}
+        startAccessor={this.startAccessor}
+        endAccessor={this.endAccessor}
+        onNavigate={this.onNavigate.bind(this)}
+        onView={this.onView.bind(this)}
+        onClick={this.onClick.bind(this)}
+      />
+    );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { calendar } = state;
+  const { calendar_events } = state;
 
   return {
-    view: calendar.view,
-    day: calendar.day,
-    week: calendar.week,
-    focused: calendar.focused,
-    events: calendar.events
+    view: calendar_events.view,
+    day: calendar_events.day,
+    week: calendar_events.week,
+    focused: calendar_events.focused,
+    events: calendar_events.events
   };
 };
 

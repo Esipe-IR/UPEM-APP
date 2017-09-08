@@ -21,13 +21,11 @@ class CResources extends React.Component {
     this.props.dispatch(askSearch(value));
   }
 
-  load(e) {
-    e.preventDefault();
-    let path = e.target.getAttribute("href", 2);
+  load(path) {
     let int = path.replace("/calendar/", "");
     int = parseInt(int, 10);
 
-    logEvent("resources_clickView", int, {
+    logEvent("resources_click_view", int, {
       uri: path
     });
 
