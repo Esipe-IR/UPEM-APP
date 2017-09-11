@@ -8,8 +8,8 @@ iframe {
   min-height: 800px;
 }
 .SingleDatePicker__picker.SingleDatePicker__picker--direction-left.SingleDatePicker__picker--horizontal.SingleDatePicker__picker--portal.SingleDatePicker__picker--full-screen-portal,
-.SingleDatePicker__picker.SingleDatePicker__picker--direction-left.SingleDatePicker__picker--horizontal.SingleDatePicker__picker--valid-date-hovered {
-  z-index: 999;
+.SingleDatePicker__picker {
+  z-index: 999 !important;
 }
 .DayPickerKeyboardShortcuts__show.DayPickerKeyboardShortcuts__show--bottom-right {
   display: none;

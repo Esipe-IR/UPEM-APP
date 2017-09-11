@@ -1,8 +1,8 @@
 import moment from "moment";
 import "moment/locale/fr";
 
-export const getFirstWeekDay = day => day.startOf("week");
-export const getLastWeekDay = day => day.endOf("week").day(-2);
+export const getFirstWeekDay = day => day.clone().startOf("week");
+export const getLastWeekDay = day => day.clone().endOf("week").day(-2);
 export const getToday = () => moment();
 export const getWeekNb = f => f.week();
 export const getMomentFromDate = date => moment(date);

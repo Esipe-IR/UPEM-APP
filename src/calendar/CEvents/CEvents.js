@@ -13,8 +13,7 @@ import {
   getLastWeekDay,
   getToday,
   getMomentFromDate,
-  getWeekNb,
-  getDayByWeek
+  getWeekNb
 } from "../../services/date";
 import { eventToDate } from "../../services/format";
 import { logEvent } from "../../services/analytics";

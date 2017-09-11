@@ -23,7 +23,7 @@ class CResources extends React.Component {
 
   load(path) {
     let resources = path.replace("/calendar/", "");
-    resources = parseInt(int, 10);
+    resources = parseInt(resources, 10);
 
     logEvent("resources_click_view", resources, {
       uri: path

@@ -34,7 +34,7 @@ const Toolbar = props => (
 
     <Col sm={4} className="text-right">
       <Button
-        color="secondary"
+        color="primary"
         outline={props.view !== "day"}
         className="mr-2"
         onClick={() => props.onViewChange("day")}
@@ -42,7 +42,7 @@ const Toolbar = props => (
         Day
       </Button>
       <Button
-        color="secondary"
+        color="primary"
         outline={props.view !== "week"}
         onClick={() => props.onViewChange("week")}
       >
