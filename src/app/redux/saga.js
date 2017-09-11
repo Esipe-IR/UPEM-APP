@@ -30,7 +30,6 @@ function* askProject(action) {
     return prev;
   }, 0);
 
-  console.log(project);
   yield put(rcvProject(project));
 }
 

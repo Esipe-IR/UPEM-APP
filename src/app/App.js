@@ -38,7 +38,7 @@ class App extends React.Component {
           ) : null}
           {this.props.project ? (
             <Route
-              path="/calendar/:resources"
+              path="/calendar/:resource"
               title="calendar_events"
               component={CEvents}
             />

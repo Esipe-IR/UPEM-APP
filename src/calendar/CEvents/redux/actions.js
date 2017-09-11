@@ -4,9 +4,11 @@ export const RCV_WEEK = "calendar/events/RCV::WEEK";
 export const RCV_FOCUSED = "calendar/events/RCV::FOCUSED";
 export const RCV_EVENTS = "calendar/events/RCV::EVENTS";
 export const RCV_MODAL = "calendar/events/RCV::MODAL";
+export const RCV_RESOURCE = "calendar/events/RCV::RESOURCE";
 
 export const ASK_EVENTS = "calendar/events/ASK::EVENTS";
 export const ADD_EVENTS = "calendar/events/ADD::EVENTS";
+export const ASK_RESOURCE = "calendar/events/ASK::RESOURCE";
 
 export const rcvView = view => ({
   type: RCV_VIEW,
@@ -38,6 +40,11 @@ export const rcvModal = modal => ({
   payload: modal
 });
 
+export const rcvResource = resource => ({
+  type: RCV_RESOURCE,
+  payload: resource
+});
+
 export const askEvents = params => ({
   type: ASK_EVENTS,
   payload: params
@@ -48,3 +55,7 @@ export const addEvents = events => ({
   payload: events
 });
 
+export const askResource = params => ({
+  type: ASK_RESOURCE,
+  payload: params
+});

@@ -16,8 +16,9 @@ function* askSearch(action) {
   const resources = yield select(
     ({ calendar_resources }) => calendar_resources.resources
   );
+
   const matches = resources.filter(
-    e => e.name.toUpperCase().indexOf(action.payload.toUpperCase()) !== -1
+    e => e.name.toUpperCase().indexOf(action.payload.toUpperCase()) === 0
   );
 
   yield put(rcvMatches(matches));

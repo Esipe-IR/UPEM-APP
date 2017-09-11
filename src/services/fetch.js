@@ -17,7 +17,6 @@ const getConfig = (query, variables, token) => ({
 const getResult = (result, name, def) => {
   if (result.errors) {
     console.log("Error =>", result.errors);
-    return def;
   }
 
   const data = result.data;
@@ -57,13 +56,13 @@ export const fetchProjects = () => {
 export const fetchEvents = params => {
   const graph = `query(
     $projectId: Int!,
-    $resources: String!,
+    $resource: String!,
     $startDate: String!,
     $endDate: String!
   ) {
     events(
       projectId: $projectId,
-      resources: $resources,
+      resources: $resource,
       startDate: $startDate,
       endDate: $endDate
     ) {
@@ -85,10 +84,22 @@ export const fetchEvents = params => {
 };
 
 export const fetchResource = params => {
-  const graph = `query($projectId: Int!, $resource: Int) {
-    resource(projectId: $projectId, resource: $resource) {
+  const graph = `query($projectId: Int!, $id: Int!, $startDate: String!, $endDate: String!) {
+    resource(projectId: $projectId, id: $id) {
       id
       name
+      category
+      events(projectId: $projectId, startDate: $startDate, endDate: $endDate) {
+        id
+        name
+        startHour
+        endHour
+        instructor
+        classroom
+        class
+        date
+        color
+      }
     }
   }`;
 

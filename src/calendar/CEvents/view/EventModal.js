@@ -36,10 +36,9 @@ class EventModal extends React.Component {
 
               <p>
                 <b>Classe:</b>
-                {this.props.modal.class.map((c, i) => (
-                  <span key={i}> {c}, </span>
-                ))}
               </p>
+              
+              {this.props.modal.class.map((c, i) => <p key={i}>{c}</p>)}
             </ModalBody>
             <ModalFooter>
               <Button color="danger" onClick={this.close.bind(this)}>

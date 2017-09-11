@@ -8,7 +8,7 @@ import { newState } from "../../../services/utils";
 export const CRState = {
   resources: [],
   matches: [],
-  maxItems: 24
+  maxItems: 15
 };
 
 export const CRReducer = {

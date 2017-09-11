@@ -13,11 +13,16 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const View = props => (
   <Container fluid>
-    <Row>
+    <Row className="mt-3">
       <Col sm={12} className="text-center">
+        <h1>{props.resource.name}</h1>
+        <p>{props.resource.category}</p>
+
         <SingleDatePicker
           focused={props.focused}
           date={props.day}
+          placeholder="Date"
+          showDefaultInputIcon={true}
           numberOfMonths={1}
           isOutsideRange={() => false}
           onDateChange={props.onDateChange}
@@ -26,11 +31,11 @@ const View = props => (
       </Col>
     </Row>
 
-    <Row className="mt-5">
+    <Row className="m-2">
       <Col sm={12}>
         <BigCalendar
           date={props.day.toDate()}
-          events={props.getEvents(props.events)}
+          events={props.getEvents(props.resource.events)}
           views={{day: true, week: MyWeek}}
           view={props.view}
           min={new Date(2017, 3, 30, 8)}

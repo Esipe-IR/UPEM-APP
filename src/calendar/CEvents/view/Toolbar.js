@@ -21,13 +21,14 @@ const Toolbar = props => (
   <Row className="justify-content-between mb-3">
     <Col sm={4}>
       <Button
-        color="secondary"
+        outline
+        color="primary"
         className="mr-2"
         onClick={() => onClickPrevious(props)}
       >
         Prev.
       </Button>
-      <Button color="secondary" onClick={() => onClickNext(props)}>
+      <Button outline color="primary" onClick={() => onClickNext(props)}>
         Next
       </Button>
     </Col>

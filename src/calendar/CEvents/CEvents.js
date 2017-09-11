@@ -6,7 +6,7 @@ import {
   rcvWeek,
   rcvFocused,
   rcvModal,
-  askEvents
+  askResource
 } from "./redux/actions";
 import {
   getFirstWeekDay,
@@ -24,14 +24,13 @@ class CEvents extends React.Component {
     const today = getToday();
     const week = getWeekNb(today);
     const view = window.innerWidth > 900 ? "week" : "day";
-    const resources = this.props.match.params.resources;
+    const resource = this.props.match.params.resource;
 
     this.props.dispatch(rcvView(view));
-    this.props.dispatch(rcvDay(today));
     this.props.dispatch(rcvWeek(week));
     this.props.dispatch(
-      askEvents({
-        resources: resources,
+      askResource({
+        resource,
         startDate: getFirstWeekDay(today),
         endDate: getLastWeekDay(today)
       })
@@ -42,18 +41,18 @@ class CEvents extends React.Component {
     this.props.dispatch(rcvDay(day));
 
     const week = getWeekNb(day);
-    const resources = this.props.match.params.resources;
+    const resource = this.props.match.params.resource;
 
-    logEvent("event_change_date", parseInt(resources, 10), {
-      resources: resources,
+    logEvent("event_change_date", parseInt(resource, 10), {
+      resource: resource,
       date: day.format("MM/DD/YYYY")
     });
 
     if (this.props.week !== week) {
       this.props.dispatch(rcvWeek(week));
       this.props.dispatch(
-        askEvents({
-          resources: resources,
+        askResource({
+          resource,
           startDate: getFirstWeekDay(day),
           endDate: getLastWeekDay(day)
         })
@@ -71,10 +70,10 @@ class CEvents extends React.Component {
   }
 
   onView(view) {
-    const resources = this.props.match.params.resources;
+    const resource = this.props.match.params.resource;
 
-    logEvent("event_change_view", parseInt(resources, 10), {
-      resources: resources,
+    logEvent("event_change_view", parseInt(resource, 10), {
+      resource: resource,
       view: view
     });
 
@@ -98,10 +97,10 @@ class CEvents extends React.Component {
   }
 
   onClick(e) {
-    const resources = this.props.match.params.resources;
+    const resource = this.props.match.params.resource;
 
-    logEvent("event_click_event", parseInt(resources, 10), {
-      resources: resources,
+    logEvent("event_click_event", parseInt(resource, 10), {
+      resource: resource,
       evt: e.name + "/" + e.date + "/" + e.startHour
     });
 
@@ -109,9 +108,7 @@ class CEvents extends React.Component {
   }
 
   getEvents(events) {
-    const element = events[this.props.week];
-
-    if (element && element.length) return element;
+    if (events && events.length) return events;
     else return [];
   }
 
@@ -140,7 +137,8 @@ const mapStateToProps = (state, ownProps) => {
     day: calendar_events.day,
     week: calendar_events.week,
     focused: calendar_events.focused,
-    events: calendar_events.events
+    events: calendar_events.events,
+    resource: calendar_events.resource
   };
 };
 
