@@ -1,23 +1,11 @@
 import moment from "moment";
 import "moment/locale/fr";
 
-export const getFirstWeekDay = () => {
-  return moment().startOf("week");
-};
-
-export const getLastWeekDay = () => {
-  return moment()
-    .endOf("week")
-    .day(-2);
-};
-
-export const getToday = () => {
-  return moment();
-};
-
-export const getWeekNb = f => {
-  return f.week();
-};
+export const getFirstWeekDay = day => day.startOf("week");
+export const getLastWeekDay = day => day.endOf("week").day(-2);
+export const getToday = () => moment();
+export const getWeekNb = f => f.week();
+export const getMomentFromDate = date => moment(date);
 
 export const getDayByWeek = (day, nb) => {
   return moment()
@@ -27,10 +15,6 @@ export const getDayByWeek = (day, nb) => {
     .second(0)
     .millisecond(0)
     .week(nb);
-};
-
-export const getMomentFromDate = date => {
-  return moment(date);
 };
 
 export const getRange = (start, end) => {

@@ -22,42 +22,41 @@ import View from "./view";
 
 class CEvents extends React.Component {
   componentDidMount() {
-    let f = getFirstWeekDay();
-    let l = getLastWeekDay();
-    let t = getToday();
+    const today = getToday();
+    const week = getWeekNb(today);
+    const view = window.innerWidth > 900 ? "week" : "day";
+    const resources = this.props.match.params.resources;
 
-    this.props.dispatch(rcvView(window.innerWidth > 900 ? "week" : "day"));
-    this.props.dispatch(rcvDay(t));
-    this.props.dispatch(rcvWeek(getWeekNb(t)));
+    this.props.dispatch(rcvView(view));
+    this.props.dispatch(rcvDay(today));
+    this.props.dispatch(rcvWeek(week));
     this.props.dispatch(
       askEvents({
-        resources: this.props.match.params.resources,
-        startDate: f,
-        endDate: l
+        resources: resources,
+        startDate: getFirstWeekDay(today),
+        endDate: getLastWeekDay(today)
       })
     );
   }
 
   onDateChange(day) {
-    let week = getWeekNb(day);
     this.props.dispatch(rcvDay(day));
 
-    logEvent(
-      "event_change_date",
-      parseInt(this.props.match.params.resources, 10),
-      {
-        resources: this.props.match.params.resources,
-        date: day.format("MM/DD/YYYY")
-      }
-    );
+    const week = getWeekNb(day);
+    const resources = this.props.match.params.resources;
+
+    logEvent("event_change_date", parseInt(resources, 10), {
+      resources: resources,
+      date: day.format("MM/DD/YYYY")
+    });
 
     if (this.props.week !== week) {
       this.props.dispatch(rcvWeek(week));
       this.props.dispatch(
         askEvents({
-          resources: this.props.match.params.resources,
-          startDate: getDayByWeek("lundi", week),
-          endDate: getDayByWeek("vendredi", week)
+          resources: resources,
+          startDate: getFirstWeekDay(day),
+          endDate: getLastWeekDay(day)
         })
       );
     }
@@ -68,54 +67,50 @@ class CEvents extends React.Component {
   }
 
   onNavigate(e) {
-    let day = getMomentFromDate(e);
+    const day = getMomentFromDate(e);
     this.onDateChange(day);
   }
 
   onView(view) {
-    logEvent(
-      "event_change_view",
-      parseInt(this.props.match.params.resources, 10),
-      {
-        resources: this.props.match.params.resources,
-        view: view
-      }
-    );
+    const resources = this.props.match.params.resources;
+
+    logEvent("event_change_view", parseInt(resources, 10), {
+      resources: resources,
+      view: view
+    });
 
     this.props.dispatch(rcvView(view));
   }
 
   startAccessor(e) {
-    let d = eventToDate(e);
-    d.setHours(parseInt(e.startHour[0] + e.startHour[1], 10));
-    d.setMinutes(parseInt(e.startHour[3] + e.startHour[4], 10));
+    const date = eventToDate(e);
+    date.setHours(parseInt(e.startHour[0] + e.startHour[1], 10));
+    date.setMinutes(parseInt(e.startHour[3] + e.startHour[4], 10));
 
-    return d;
+    return date;
   }
 
   endAccessor(e) {
-    let d = eventToDate(e);
-    d.setHours(parseInt(e.endHour[0] + e.endHour[1], 10));
-    d.setMinutes(parseInt(e.endHour[3] + e.endHour[4], 10));
+    const date = eventToDate(e);
+    date.setHours(parseInt(e.endHour[0] + e.endHour[1], 10));
+    date.setMinutes(parseInt(e.endHour[3] + e.endHour[4], 10));
 
-    return d;
+    return date;
   }
 
   onClick(e) {
-    logEvent(
-      "event_click_event",
-      parseInt(this.props.match.params.resources, 10),
-      {
-        resources: this.props.match.params.resources,
-        evt: e.name + "/" + e.date + "/" + e.startHour
-      }
-    );
+    const resources = this.props.match.params.resources;
+
+    logEvent("event_click_event", parseInt(resources, 10), {
+      resources: resources,
+      evt: e.name + "/" + e.date + "/" + e.startHour
+    });
 
     this.props.dispatch(rcvModal(e));
   }
 
   getEvents(events) {
-    let element = events[this.props.week];
+    const element = events[this.props.week];
 
     if (element && element.length) return element;
     else return [];

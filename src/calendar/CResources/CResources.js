@@ -12,7 +12,7 @@ class CResources extends React.Component {
 
   search(e) {
     e.preventDefault();
-    let value = e.target[0].value;
+    const value = e.target[0].value;
 
     logEvent("resources_search", null, {
       search: value
@@ -22,10 +22,10 @@ class CResources extends React.Component {
   }
 
   load(path) {
-    let int = path.replace("/calendar/", "");
-    int = parseInt(int, 10);
+    let resources = path.replace("/calendar/", "");
+    resources = parseInt(int, 10);
 
-    logEvent("resources_click_view", int, {
+    logEvent("resources_click_view", resources, {
       uri: path
     });
 

@@ -14,6 +14,21 @@ const getConfig = (query, variables, token) => ({
   })
 });
 
+const getResult = (result, name, def) => {
+  if (result.errors) {
+    console.log("Error =>", result.errors);
+    return def;
+  }
+
+  const data = result.data;
+
+  if (data && data[name]) {
+    return data[name];
+  }
+
+  return def;
+};
+
 export const fetchUser = token => {
   const graph = `query {
     user {
@@ -23,20 +38,7 @@ export const fetchUser = token => {
 
   return fetch(GRAPH_URL, getConfig(graph, null, token))
     .then(result => result.json())
-    .then(result => {
-      if (result.errors) {
-        console.log("Error =>", result.errors);
-        return;
-      }
-
-      const data = result.data;
-
-      if (data.user) {
-        return data.user;
-      }
-
-      return null;
-    });
+    .then(result => getResult(result, "user", null));
 };
 
 export const fetchProjects = () => {
@@ -49,20 +51,7 @@ export const fetchProjects = () => {
 
   return fetch(GRAPH_URL, getConfig(graph))
     .then(result => result.json())
-    .then(result => {
-      if (result.errors) {
-        console.log("Error =>", result.errors);
-        return;
-      }
-
-      const data = result.data;
-
-      if (data.projects) {
-        return data.projects;
-      }
-
-      return null;
-    });
+    .then(result => getResult(result, "projects", null));
 };
 
 export const fetchEvents = params => {
@@ -92,20 +81,7 @@ export const fetchEvents = params => {
 
   return fetch(GRAPH_URL, getConfig(graph, params))
     .then(result => result.json())
-    .then(result => {
-      if (result.errors) {
-        console.log("Error =>", result.errors);
-        return;
-      }
-
-      const data = result.data;
-
-      if (data.events) {
-        return data.events;
-      }
-
-      return [];
-    });
+    .then(result => getResult(result, "events", []));
 };
 
 export const fetchResource = params => {
@@ -118,9 +94,7 @@ export const fetchResource = params => {
 
   return fetch(GRAPH_URL, getConfig(graph, params))
     .then(result => result.json())
-    .then(result => {
-      console.log(result);
-    });
+    .then(result => getResult(result, "resource", null));
 };
 
 export const fetchResources = params => {
@@ -133,18 +107,5 @@ export const fetchResources = params => {
 
   return fetch(GRAPH_URL, getConfig(graph, params))
     .then(result => result.json())
-    .then(result => {
-      if (result.errors) {
-        console.log("Error =>", result.errors);
-        return;
-      }
-
-      const data = result.data;
-
-      if (data.resources) {
-        return data.resources;
-      }
-
-      return [];
-    });
+    .then(result => getResult(result, "resources", []));
 };

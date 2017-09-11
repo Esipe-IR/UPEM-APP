@@ -6,9 +6,7 @@ export const eventToDate = event => {
   return new Date(y, m - 1, d);
 };
 
-export const dateToTimestamp = date => {
-  return date.getTime() / 1000;
-};
+export const dateToTimestamp = date => date.getTime() / 1000;
 
 const getWeekTimestamp = (f, l) => {
   let days = [];
