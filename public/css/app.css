@@ -1,7 +1,8 @@
+html, body, #root, #main {
+  height: 100%;
+}
 iframe {
   overflow: hidden;
-  height: 35px;
-  width: 145px;
   border: none !important;
 }
 .rbc-calendar {

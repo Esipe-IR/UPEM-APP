@@ -6,6 +6,8 @@ import Topbar from "./Topbar";
 import Home from "../home/Home";
 import CResources from "../calendar/CResources/CResources";
 import CEvents from "../calendar/CEvents/CEvents";
+import Mail from "../mail/Mail";
+import About from "../about/About";
 import { askProject } from "./redux/actions";
 
 class App extends React.Component {
@@ -16,7 +18,7 @@ class App extends React.Component {
   render() {
     return (
       <ConnectedRouter history={this.props.history}>
-        <main>
+        <div id="main">
           <Topbar />
           <Route exact path="/" title="home" component={Home} />
 
@@ -36,10 +38,10 @@ class App extends React.Component {
             />
           ) : null}
 
-          <Route path="/mail" title="mail" component={null} />
+          <Route path="/mail" title="mail" component={Mail} />
           <Route path="/maps" title="maps" component={null} />
-          <Route path="/about" title="about" component={null} />
-        </main>
+          <Route path="/about" title="about" component={About} />
+        </div>
       </ConnectedRouter>
     );
   }
