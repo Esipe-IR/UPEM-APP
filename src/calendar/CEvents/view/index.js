@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Badge } from "reactstrap";
 import { SingleDatePicker } from "react-dates";
 import BigCalendar from "react-big-calendar";
 
@@ -12,11 +12,11 @@ import "react-dates/lib/css/_datepicker.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const View = props => (
-  <Container fluid>
+  <Container>
     <Row className="mt-3">
       <Col sm={12} className="text-center">
-        <h1>{props.resource.name}</h1>
-        <p>{props.resource.category}</p>
+        <Badge color="primary">{props.resource.category}</Badge>
+        <h1 className="mb-3">{props.resource.name}</h1>
 
         <SingleDatePicker
           focused={props.focused}
@@ -31,12 +31,12 @@ const View = props => (
       </Col>
     </Row>
 
-    <Row className="m-2">
+    <Row className="mb-5">
       <Col sm={12}>
         <BigCalendar
           date={props.day.toDate()}
           events={props.getEvents(props.resource.events)}
-          views={{day: true, week: MyWeek}}
+          views={{ day: true, week: MyWeek }}
           view={props.view}
           min={new Date(2017, 3, 30, 8)}
           max={new Date(2017, 3, 30, 19)}

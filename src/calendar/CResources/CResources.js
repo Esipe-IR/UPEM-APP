@@ -1,12 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
-import { askResources, askSearch, rcvMaxItems } from "./redux/actions";
+import {
+  askResources,
+  askSearch,
+  rcvMaxItems,
+  rcvResources,
+  rcvMatches
+} from "./redux/actions";
 import { logEvent } from "../../services/analytics";
 import View from "./view";
 
 class CResources extends React.Component {
   componentDidMount() {
+    this.props.dispatch(rcvResources([]));
+    this.props.dispatch(rcvMatches([]));
     this.props.dispatch(askResources());
   }
 
@@ -34,7 +42,6 @@ class CResources extends React.Component {
 
   more() {
     const maxItems = this.props.maxItems + 15;
-
     this.props.dispatch(rcvMaxItems(maxItems));
   }
 

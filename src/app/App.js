@@ -6,19 +6,11 @@ import Topbar from "./Topbar";
 import Home from "../home/Home";
 import CResources from "../calendar/CResources/CResources";
 import CEvents from "../calendar/CEvents/CEvents";
-import { rcvToken, askUser, askProject } from "./redux/actions";
-import { sdk } from "../services/upem";
+import { askProject } from "./redux/actions";
 
 class App extends React.Component {
   componentDidMount() {
-    let { dispatch } = this.props;
-
-    sdk.onToken(token => {
-      dispatch(rcvToken(token));
-      dispatch(askUser());
-    });
-
-    dispatch(askProject());
+    this.props.dispatch(askProject());
   }
 
   render() {
@@ -43,14 +35,22 @@ class App extends React.Component {
               component={CEvents}
             />
           ) : null}
+
+          <Route path="/mail" title="mail" component={null} />
+          <Route path="/maps" title="maps" component={null} />
+          <Route path="/about" title="about" component={null} />
         </main>
       </ConnectedRouter>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  project: state.app.project
-});
+const mapStateToProps = (state, ownProps) => {
+  const { app } = state;
+
+  return {
+    project: app.project
+  };
+};
 
 export default connect(mapStateToProps)(App);

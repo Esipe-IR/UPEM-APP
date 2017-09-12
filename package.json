@@ -19,7 +19,7 @@
     "redux-devtools-extension": "^2.13.0"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap": "4.0.0-alpha.6",
     "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
@@ -35,7 +35,7 @@
     "redux": "^3.6.0",
     "redux-localstorage": "^0.4.1",
     "redux-saga": "^0.14.8",
-    "upem-sdk": "^4.0.1"
+    "upem-sdk": "^5.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

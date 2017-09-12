@@ -60,7 +60,7 @@ const View = props => (
     {props.matches.length > props.maxItems ? (
       <Row className="m-3">
         <Col sm={12} className="text-center">
-          <Button color="primary" onClick={() => props.more()}>
+          <Button outline color="primary" onClick={() => props.more()}>
             Load more...
           </Button>
         </Col>

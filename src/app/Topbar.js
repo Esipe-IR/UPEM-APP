@@ -11,14 +11,10 @@ import {
 } from "reactstrap";
 import { push } from "react-router-redux";
 import { rcvToggleNav } from "./redux/actions";
-import { UPEM_URL } from "../services/upem";
 import { logEvent } from "../services/analytics";
 
 class Topbar extends React.Component {
-  load(e) {
-    e.preventDefault();
-    let path = e.target.getAttribute("href", 2);
-
+  load(path) {
     logEvent("navbar_click_link", null, {
       uri: path
     });
@@ -31,36 +27,30 @@ class Topbar extends React.Component {
     this.props.dispatch(rcvToggleNav(!this.props.toggleNav));
   }
 
-  navItem() {
-    if (this.props.user) {
-      return (
-        <div>
-          <span className="navbar-text">{this.props.user.uid}</span>
-        </div>
-      );
-    }
-
-    return (
-      <iframe frameBorder="0" src={UPEM_URL + "/connect"} id="upem-connect" />
-    );
-  }
-
   render() {
     return (
       <Navbar color="inverse" full inverse toggleable>
         <NavbarToggler right onClick={this.onClick.bind(this)} />
-        <NavbarBrand href="/">UPEM App</NavbarBrand>
+        <NavbarBrand href="/">UPEM APP</NavbarBrand>
         <Collapse isOpen={this.props.toggleNav} navbar>
           <Nav navbar>
             <NavItem>
-              <NavLink onClick={this.load.bind(this)} href="/">
-                Home
-              </NavLink>
+              <NavLink onClick={() => this.load("/")}>Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink onClick={this.load.bind(this)} href="/calendar">
-                Calendar
-              </NavLink>
+              <NavLink onClick={() => this.load("/calendar")}>Calendar</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={() => this.load("/mail")}>Mail</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={() => this.load("/maps")}>Maps</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={() => this.load("/tools")}>Tools</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={() => this.load("/about")}>About</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

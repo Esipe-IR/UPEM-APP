@@ -6,6 +6,7 @@ import {
   rcvWeek,
   rcvFocused,
   rcvModal,
+  rcvResource,
   askResource
 } from "./redux/actions";
 import {
@@ -26,6 +27,7 @@ class CEvents extends React.Component {
     const view = window.innerWidth > 900 ? "week" : "day";
     const resource = this.props.match.params.resource;
 
+    this.props.dispatch(rcvResource({}));
     this.props.dispatch(rcvView(view));
     this.props.dispatch(rcvWeek(week));
     this.props.dispatch(
@@ -64,8 +66,8 @@ class CEvents extends React.Component {
     this.props.dispatch(rcvFocused(e.focused));
   }
 
-  onNavigate(e) {
-    const day = getMomentFromDate(e);
+  onNavigate(date) {
+    const day = getMomentFromDate(date);
     this.onDateChange(day);
   }
 

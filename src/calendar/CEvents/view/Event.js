@@ -4,7 +4,7 @@ const Event = (e) => (
   <div className="rbc-event" style={{
     ...e.children.props.style,
     borderColor: "rgb(" + e.event.color + ")",
-    width: e.children.props.style.width === "65%" ? "50%" : "96%",
+    width: e.children.props.style.width === "65%" ? "47%" : "96%",
     left: e.children.props.style.left === "35%" ? "50%" : "2%",
     background: "#FBFBFB",
     padding: 0,
