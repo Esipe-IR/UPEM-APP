@@ -2,18 +2,14 @@
   "name": "upem-app",
   "version": "2.0.0",
   "private": true,
-  "description": "",
+  "description": "UPEM APP regroup different UPEM services such as Calendar or Mail",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Esipe-IR/UPEM-APP.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vincent Rasquier",
   "license": "MIT",
-  "bugs": {
-    "url": ""
-  },
-  "homepage": "",
   "devDependencies": {
     "react-scripts": "^0.9.5",
     "redux-devtools-extension": "^2.13.0"
@@ -35,7 +31,7 @@
     "redux": "^3.6.0",
     "redux-localstorage": "^0.4.1",
     "redux-saga": "^0.14.8",
-    "upem-sdk": "^5.0.0"
+    "upem-sdk": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
