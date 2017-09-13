@@ -1,14 +1,16 @@
+html, body, #root, #main {
+  height: 100%;
+}
 iframe {
   overflow: hidden;
-  height: 35px;
-  width: 145px;
   border: none !important;
 }
 .rbc-calendar {
   min-height: 800px;
 }
-.SingleDatePicker__picker.SingleDatePicker__picker--direction-left.SingleDatePicker__picker--horizontal.SingleDatePicker__picker--portal.SingleDatePicker__picker--full-screen-portal {
-  z-index: 999;
+.SingleDatePicker__picker.SingleDatePicker__picker--direction-left.SingleDatePicker__picker--horizontal.SingleDatePicker__picker--portal.SingleDatePicker__picker--full-screen-portal,
+.SingleDatePicker__picker {
+  z-index: 999 !important;
 }
 .DayPickerKeyboardShortcuts__show.DayPickerKeyboardShortcuts__show--bottom-right {
   display: none;
@@ -16,16 +18,4 @@ iframe {
 section {
   padding-top: 20px;
   padding-bottom: 20px;
-}
-.stylish-input-group .input-group-addon{
-  background: white !important; 
-}
-.stylish-input-group .form-control{
-	border-right:0; 
-	box-shadow:0 0 0; 
-	border-color:#ccc;
-}
-.stylish-input-group button{
-  border:0;
-  background:transparent;
 }

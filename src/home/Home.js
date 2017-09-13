@@ -1,13 +1,18 @@
-import React from 'react'
+import React from "react";
+import { Container, Row, Col, Badge } from "reactstrap";
 
 export default class Home extends React.Component {
   render() {
     return (
-      <section className="container">
-        <h1>UPEM Tools</h1>
+      <Container>
+        <Row>
+          <Col sm={12}>
+            <h1>UPEM APP</h1>
 
-        <p>Version: 1.0 Alpha</p>
-      </section>
-    )
+            <Badge color="primary">Version: 2.0 Alpha</Badge>
+          </Col>
+        </Row>
+      </Container>
+    );
   }
 }

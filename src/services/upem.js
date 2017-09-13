@@ -1,7 +1,7 @@
-import { SDK } from 'upem-sdk'
+import { UPEMSDK } from "upem-sdk";
 
-export const UPEM_URL = "https://perso-etudiant.u-pem.fr/~vrasquie/core"
+export const UPEM_URL = "https://perso-etudiant.u-pem.fr/~vrasquie/api";
 
-export const sdk = new SDK({
+export const SDK = new UPEMSDK({
   baseURL: UPEM_URL
-})
+});

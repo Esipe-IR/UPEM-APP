@@ -1,37 +1,58 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Route } from 'react-router'
-import { ConnectedRouter } from 'react-router-redux'
-import Topbar from './Topbar'
-import Home from '../home/Home'
-import CalendarResources from '../calendar/CalendarResources'
-import CalendarEvents from '../calendar/CalendarEvents'
-import { receiveToken, askUser } from './redux/actions'
-import { sdk } from '../services/upem'
+import React from "react";
+import { connect } from "react-redux";
+import { Route } from "react-router";
+import { ConnectedRouter } from "react-router-redux";
+import Topbar from "./Topbar";
+import Home from "../home/Home";
+import CResources from "../calendar/CResources/CResources";
+import CEvents from "../calendar/CEvents/CEvents";
+import Mail from "../mail/Mail";
+import About from "../about/About";
+import { askProject } from "./redux/actions";
 
 class App extends React.Component {
   componentDidMount() {
-    let { dispatch } = this.props
-
-    sdk.onToken(token => {
-     dispatch(receiveToken(token))
-     dispatch(askUser())
-    })
+    this.props.dispatch(askProject());
   }
 
   render() {
     return (
       <ConnectedRouter history={this.props.history}>
-        <main>
+        <div id="main">
           <Topbar />
-          
           <Route exact path="/" title="home" component={Home} />
-          <Route exact path="/calendar" title="calendar_resources" component={CalendarResources} />
-          <Route path="/calendar/:resources" title="calendar_events" component={CalendarEvents} />
-        </main>
+
+          {this.props.project ? (
+            <Route
+              exact
+              path="/calendar"
+              title="calendar_resources"
+              component={CResources}
+            />
+          ) : null}
+          {this.props.project ? (
+            <Route
+              path="/calendar/:resource"
+              title="calendar_events"
+              component={CEvents}
+            />
+          ) : null}
+
+          <Route path="/mail" title="mail" component={Mail} />
+          <Route path="/maps" title="maps" component={null} />
+          <Route path="/about" title="about" component={About} />
+        </div>
       </ConnectedRouter>
-    )
+    );
   }
 }
 
-export default connect()(App)
+const mapStateToProps = (state, ownProps) => {
+  const { app } = state;
+
+  return {
+    project: app.project
+  };
+};
+
+export default connect(mapStateToProps)(App);

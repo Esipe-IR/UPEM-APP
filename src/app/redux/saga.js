@@ -1,17 +1,41 @@
-import { takeLatest, put, call, select } from 'redux-saga/effects'
-import { ASK_USER, receiveUser } from './actions'
-import { fetchUser } from '../../services/fetch'
+import { takeLatest, put, call, select } from "redux-saga/effects";
+import { ASK_USER, ASK_PROJECT, rcvUser, rcvProject } from "./actions";
+import { fetchUser, fetchProjects } from "../../services/fetch";
 
-function* appSaga() {
-  yield takeLatest(ASK_USER, function* (action) {
-    const token = yield select(({app}) => app.token)
-    const data = yield call(fetchUser, token)
+function* askUser(action) {
+  const token = yield select(({ app }) => app.token);
+  const user = yield call(fetchUser, token);
 
-    let user = null
-    if (data) user = data.user
-
-    yield put(receiveUser(user))
-  })
+  yield put(rcvUser(user));
 }
 
-export default appSaga
+function* askProject(action) {
+  const today = new Date();
+  const month = today.getMonth();
+  let year = today.getFullYear();
+
+  if (month < 8) {
+    year--;
+  }
+
+  const projects = yield call(fetchProjects);
+  const project = projects.reduce((prev, curr) => {
+    if (prev !== 0) return prev;
+    const schoolY = curr.name.split("-");
+
+    if (parseInt(schoolY[0], 10) === year) {
+      return curr.id;
+    }
+
+    return prev;
+  }, 0);
+
+  yield put(rcvProject(project));
+}
+
+function* AppSaga() {
+  yield takeLatest(ASK_USER, askUser);
+  yield takeLatest(ASK_PROJECT, askProject);
+}
+
+export default AppSaga;

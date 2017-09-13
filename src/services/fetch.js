@@ -1,71 +1,47 @@
-import { UPEM_URL } from './upem'
+import { SDK } from "./upem";
 
-const GRAPH_URL = UPEM_URL + "/graphql"
-
-const getConfig = (query, variables, token) => ({
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': token
-  },
-  body: JSON.stringify({
-    query: query,
-    variables: variables
-  })
-})
-
-export const fetchUser = (token) => {
-  const graph = `query {
-    user {
-      uid
-    }
-  }`
-
-  return fetch(GRAPH_URL, getConfig(graph, null, token))
-  .then(result => result.json())
-  .then(result => result.data)
-}
-
-export const fetchEvents = (params) => {
-  const graph = `query($resources: String!, $date: String, $startDate: String, $endDate: String) {
-    events(resources: $resources,
-      date: $date,
-      startDate: $startDate,
-      endDate: $endDate) {
-        id
-        name
-        startHour
-        endHour
-        instructor
-        classroom
-        class
-        color
-        date
-    }
-  }`
-
-  let variables = {
-    resources: params.resources
+const extract = (data, errors, type, def) => {
+  if (errors) {
+    console.log(errors);
   }
 
-  if (params.date) variables.date = params.date.format("MM/DD/YYYY").toString()
-  if (params.startDate) variables.startDate = params.startDate.format("MM/DD/YYYY").toString()
-  if (params.endDate) variables.endDate = params.endDate.format("MM/DD/YYYY").toString()
+  if (data && data[type]) {
+    return data[type];
+  }
 
-  return fetch(GRAPH_URL, getConfig(graph, variables))
-  .then(result => result.json())
-  .then(result => result.data)
-}
+  return def;
+};
 
-export const fetchResources = () => {
-  const graph = `query {
-    resources {
-      id
-      name
-    }
-  }`
+export const fetchUser = token => {
+  return new Promise((resolve, reject) => {
+    SDK.getUser((data, errors) => {});
+  });
+};
 
-  return fetch(GRAPH_URL, getConfig(graph))
-  .then(result => result.json())
-  .then(result => result.data)
-}
+export const fetchProjects = () => {
+  return new Promise((resolve, reject) => {
+    SDK.getProjects((data, errors) =>
+      resolve(extract(data, errors, "projects", []))
+    );
+  });
+};
+
+export const fetchResource = params => {
+  return new Promise((resolve, reject) => {
+    SDK.getResourceWithEvents(
+      params.projectId,
+      params.id,
+      params.startDate,
+      params.endDate,
+      (data, errors) => resolve(extract(data, errors, "resource", {}))
+    );
+  });
+};
+
+export const fetchResources = params => {
+  return new Promise((resolve, reject) => {
+    SDK.getResources(params.projectId, (data, errors) =>
+      resolve(extract(data, errors, "resources", []))
+    );
+  });
+};

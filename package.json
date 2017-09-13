@@ -1,40 +1,37 @@
 {
-  "name": "upem-tools",
-  "version": "1.0.0",
+  "name": "upem-app",
+  "version": "2.0.0",
   "private": true,
-  "description": "",
+  "description": "UPEM APP regroup different UPEM services such as Calendar or Mail",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Esipe-IR/UPEM-APP.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vincent Rasquier",
   "license": "MIT",
-  "bugs": {
-    "url": ""
-  },
-  "homepage": "",
   "devDependencies": {
     "react-scripts": "^0.9.5",
     "redux-devtools-extension": "^2.13.0"
   },
   "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
     "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-shallow-compare": "^15.5.2",
     "react-addons-transition-group": "^15.5.2",
-    "react-big-calendar": "^0.13.0",
-    "react-dates": "^10.1.1",
+    "react-big-calendar": "^0.15.0",
+    "react-dates": "^12.6.0",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
-    "reactstrap": "^4.5.0",
+    "reactstrap": "^4.8.0",
     "redux": "^3.6.0",
     "redux-localstorage": "^0.4.1",
     "redux-saga": "^0.14.8",
-    "upem-sdk": "^4.0.1"
+    "upem-sdk": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
